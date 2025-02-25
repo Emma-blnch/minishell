@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:49:44 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/24 09:29:15 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/25 15:26:02 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,23 +119,38 @@ static bool	add_special(t_token **begin, char **command)
 bool	create_list_token(t_token **begin, char *command)
 {
 	(*begin) = NULL;
+	int last_was_operator = 0;
 	while (*command)
 	{
 		while (is_space(*command))
 			command++;
-		if (*command && !is_special(command) && !add_cmd(begin, &command))
+		if (*command == '\0')
+			break;
+		if (is_special(command))
 		{
-			if (*begin)
+			if (last_was_operator)
+			{
+				//write(2, "Error: Unexpected token after operator\n", 39);
 				free_token(begin);
-			return (false);
+			}
+			if (!add_special(begin, &command))
+			{
+				free_token(begin);
+				return (false);
+			}
+			last_was_operator = 1;
 		}
-		else if (*command && is_special(command) && \
-					!add_special(begin, &command))
+		else
 		{
-			if (*begin)
+			if (!add_cmd(begin, &command))
+			{
 				free_token(begin);
-			return (false);
+				return (false);
+			}
+			last_was_operator = 0;
 		}
+		if (*command != '\0')
+			command++;
 	}
 	return (true);
 }
