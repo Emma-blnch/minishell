@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mkling <mkling@student.42.fr>              +#+  +:+       +#+         #
+#    By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 10:20:10 by mkling            #+#    #+#              #
-#    Updated: 2024/12/13 15:12:02 by mkling           ###   ########.fr        #
+#    Updated: 2025/02/26 16:00:12 by ahamini          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,10 @@ SRC_DIR = src
 OBJ_DIR = obj
 
 INC_DIR = inc
+
+# Flags
+MAKEFLAGS += --no-print-directory
+$(VERBOSE).SILENT:
 
 
 # Files

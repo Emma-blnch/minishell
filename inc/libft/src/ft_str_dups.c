@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_dups.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skassimi <skassimi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:03:46 by mkling            #+#    #+#             */
-/*   Updated: 2024/12/29 10:21:03 by skassimi         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:00:23 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,40 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*result;
-	size_t	len;
+	int		i;
+	int		j;
+	char	*str;
 
-	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	result = ft_calloc(len, sizeof(char));
-	if (!result)
+	if (!s1 || !s2)
 		return (NULL);
-	ft_memcpy(result, s1, ft_strlen(s1));
-	ft_strlcat(result, s2, len);
-	return (result);
+	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
+		return (NULL);
+	i = -1;
+	j = -1;
+	while (s1[++j])
+		str[++i] = s1[j];
+	j = -1;
+	while (s2[++j])
+		str[++i] = s2[j];
+	str[i + 1] = '\0';
+	return (str);
 }
 
 char	*ft_strdup(const char *src)
 {
-	int		i;
 	char	*new;
+	int		i;
 
 	i = 0;
 	while (src[i])
 		i++;
-	new = malloc((i + 1) * sizeof(char));
-	if (new == NULL)
+	new = malloc(sizeof(char) * (i + 1));
+	if (!new)
 		return (NULL);
-	i = 0;
-	while (src[i])
-	{
+	i = -1;
+	while (src[++i])
 		new[i] = src[i];
-		i++;
-	}
 	new[i] = '\0';
 	return (new);
 }

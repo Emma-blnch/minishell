@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:02:49 by skassimi          #+#    #+#             */
-/*   Updated: 2025/02/24 13:26:26 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:35:45 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,18 @@
 # define MINISHELL_H
 
 # include <stdio.h>
-# include <string.h>
-# include <unistd.h>
-# include <fcntl.h>
 # include <stdlib.h>
 # include <stdbool.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include <signal.h>
+# include <sys/stat.h>
 # include <limits.h>
-# include <time.h>
+# include <fcntl.h>
+# include <sys/stat.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "/home/ahamini/Documents/minishell2/inc/libft/inc/libft.h"
+# include "/home/akim/42/minishell/inc/libft/inc/libft.h"
+//# include "/home/ahamini/Documents/minishell/inc/libft/inc/libft.h"
 
 extern pid_t	g_signal_pid;
 
@@ -45,11 +44,11 @@ typedef struct s_cmd
 	int				infile;
 	int				outfile;
 	char			**cmd_param;
-	size_t			cmd_index;
-	t_list			*infiles;
-	t_list			*outfiles;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
+	//size_t			cmd_index;
+	//t_list			*infiles;
+	//t_list			*outfiles;
 }				t_cmd;
 
 typedef struct s_shell
@@ -106,6 +105,9 @@ int	here_doc(t_shell *shell, char *word);
 int			exec_tree(t_shell *shell);
 int			append(t_list **list, char *elem);
 char		**lst_to_arr(t_list *env);
+void		child_process(t_shell *shell, t_cmd *cmd, int *pip);
+void		absolute_path(char **path, char *cmd, t_shell *shell);
+char		*find_cmd(t_shell *shell, char *sample, t_list *env);
 //int			exec_pipe(t_shell *shell, t_tree *tree);
 //int			exec_one_cmd(t_shell *shell, t_tree *tree, bool piped);
 //int			create_process_or_pipe(t_shell *shell, int *fd, bool is_pipe);
@@ -158,6 +160,9 @@ int			free_list(t_list **list);
 
 void	clear_rl_line(void);
 void	signals(void);
+void	handle_sigtstp(int code);
+void	signals2(void);
+
 
 /* DEBUG */
 

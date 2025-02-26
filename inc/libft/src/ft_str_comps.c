@@ -3,32 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_comps.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skassimi <skassimi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 14:50:50 by mkling            #+#    #+#             */
-/*   Updated: 2024/12/27 13:03:48 by skassimi         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:15:00 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "../inc/libft.h"
 
-char	*ft_strchr(const char *str, int c)
+char	*ft_strchr(const char *string, int searchedChar)
 {
 	int	i;
 
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == (char)c)
-			return ((char *)&str[i]);
-		i++;
-	}
-	if (str[i] == (char)c)
-		return ((char *)&str[i]);
-	if (!str)
-		return (0);
-	return (0);
+	i = -1;
+	while (string[++i])
+		if (string[i] == (unsigned char)searchedChar)
+			return ((char *)&string[i]);
+	if (string[i] == (unsigned char)searchedChar)
+		return ((char *)&string[i]);
+	return (NULL);
 }
 
 int	ft_strcmp(const char *str1, const char *str2)
@@ -43,16 +38,19 @@ int	ft_strcmp(const char *str1, const char *str2)
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	i;
+	unsigned int	i;
 
-	i = 0;
 	if (n == 0)
-		return (0);
-	while (i <= n && s1[i] != '\0' && s1[i] == s2[i])
-		i++;
-	if (i == n)
-		return (0);
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		return (-1);
+	i = 0;
+	while ((s1[i] && s2[i]) && i < n - 1)
+	{
+		if (s1[i] == s2[i])
+			i++;
+		else
+			break ;
+	}
+	return (s1[i] - s2[i]);
 }
 
 char	*ft_strrchr(const char *str, int c)

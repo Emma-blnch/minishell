@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 09:15:25 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/24 09:23:37 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:30:03 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static int	in_env(t_shell *shell, char *line, int size, char **str)
 
 	key = get_dollar_word(line, size);
 	value = get_elem_env(shell->env, key);
+	if (!value)
+		value = ft_strdup("");
 	if (key)
 		free(key);
 	tmp = ft_strjoin(*str, value);
@@ -95,27 +97,29 @@ int	add_char(char *c, char **str, t_shell *shell, int *index)
 
 int	replace_dollar(char **line, t_shell *shell)
 {
-	bool	dquote;
-	int		i;
-	char	*str;
+    bool	dq;
+    int		i;
+    char	*str;
 
-	i = 0;
-	dquote = false;
-	shell->squote = false;
-	str = ft_strdup("");
-	while ((*line)[i])
-	{
-		quoting_choice(&dquote, &shell->squote, NULL, (*line)[i]);
-		if ((*line)[i] && (*line)[i + 1] && (*line)[i] == '$' && \
-			((*line)[i + 1] != '\'' && (*line)[i + 1] != '"') && \
-			(ft_isalpha((*line)[i + 1]) || (*line)[i + 1] == '?' || \
-			(*line)[i + 1] == '_') && !shell->squote && \
-			!add_dollar((*line), &i, &str, shell))
-			return (0);
-		if ((*line)[i] && !add_char(&(*line)[i], &str, shell, &i))
-			return (0);
-	}
-	free(*line);
-	*line = str;
-	return (1);
+    i = 0;
+    dq = false;
+    shell->squote = false;
+    str = ft_strdup("");
+    while ((*line)[i])
+    {
+        quoting_choice(&dq, &shell->squote, NULL, (*line)[i]);
+        if ((*line)[i] == '$' && !shell->squote && (ft_isalpha((*line)[i + 1]) || (*line)[i + 1] == '?' || (*line)[i + 1] == '_'))
+        {
+            if (!add_dollar((*line), &i, &str, shell))
+                return (0);
+        }
+        else
+        {
+            if (!add_char(&(*line)[i], &str, shell, &i))
+                return (0);
+        }
+    }
+    free(*line);
+    *line = str;
+    return (1);
 }

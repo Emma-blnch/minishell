@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:49:13 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/25 15:17:02 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:44:16 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,6 @@ bool	parse_cmd(t_shell *shell, char *input)
 	}
 	free(input);
 	print_token(shell->token);
-	//printf("hello1\n");
-	//if (!pipe_error(shell))
-	//	return (false);
-	//if (!operator_error(shell))
-		//return (false);
 	if (!shell->token || !create_list_cmd(shell))
 	{
 		free_token(&shell->token);

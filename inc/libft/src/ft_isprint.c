@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skassimi <skassimi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:28:46 by mkling            #+#    #+#             */
-/*   Updated: 2024/12/27 10:04:58 by skassimi         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:12:58 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int c)
+/*int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (2048);
 	return (0);
-}
+}*/
 
 int	ft_isprint(int c)
 {

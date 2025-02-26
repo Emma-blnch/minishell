@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2025/02/24 13:32:21 by ahamini          ###   ########.fr        #
+#    Created: 2025/02/26 15:54:29 by ahamini           #+#    #+#              #
+#    Updated: 2025/02/26 16:46:24 by ahamini          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@
 # **************************************************************************** #
 
 NAME		= minishell
+
+MAKEFLAGS += --no-print-directory
 
 DIR_SRC		= src
 DIR_EXEC	= execution
@@ -31,14 +33,13 @@ DIR_LIB		= $(DIR_INC)/libft
 
 HEADER		= $(DIR_INC)/minishell.h
 
+MAIN		=	main.c
+
 FUNC_EXEC	= 	execution.c \
-				readability.c \
-				redirection.c \
-				path.c \
+				exec2.c \
+				find_cmd.c \
 				setup.c \
-				heredoc.c \
-				errors.c \
-				ast.c
+				heredoc.c
 
 				
 FUNC_PARS	=	cleanup.c \
@@ -46,12 +47,12 @@ FUNC_PARS	=	cleanup.c \
 				cmd_utils.c \
 				dollar_utils.c \
 				errors.c \
-				errors2.c \
 				manage_dollar.c \
 				parse_cmd.c \
 				quote.c \
 				readline.c \
 				signals.c \
+				signals2.c \
 				token_utils.c \
 				token.c
 
