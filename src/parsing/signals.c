@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 09:47:59 by skassimi          #+#    #+#             */
-/*   Updated: 2025/02/26 16:33:29 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/27 14:40:19 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	clear_rl_line(void)
 static void	handle_sigint(int code)
 {
 	(void)code;
+	g_signal_pid = 130;
 	printf("\n");
 	clear_rl_line();
-	if (g_signal_pid == 0)
-		rl_redisplay();
+	rl_redisplay();
 }
 
 static void	handle_sigsegv(int code)

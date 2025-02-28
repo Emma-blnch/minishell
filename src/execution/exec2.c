@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:44:19 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/26 11:55:32 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/27 14:18:05 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ static bool	check_dir(char **path, char *cmd, t_shell *shell)
 {
 	struct stat	path_stat;
 
+	(void)shell;
 	stat(*path, &path_stat);
 	if (!S_ISREG(path_stat.st_mode))
 	{
 		print_error2(cmd);
 		print_error2(" : Is a directory\n");
-		shell->exit_code = 126;
+		g_signal_pid = 126;
 		return (false);
 	}
 	return (true);
@@ -47,11 +48,11 @@ static bool	cmd_exist(char **path, t_shell *shell, char *cmd)
 		*path = find_cmd(shell, cmd, shell->env);
 	else
 		absolute_path(path, cmd, shell);
-	if (!(*path) && shell->exit_code == -1)
-		free_all(shell, NULL, shell->exit_code);
+	if (!(*path) && g_signal_pid == -1)
+		free_all(shell, NULL, g_signal_pid);
 	if (!(*path))
 	{
-		shell->exit_code = 127;
+		g_signal_pid = 127;
 		return (false);
 	}
 	if (access((*path), X_OK))
@@ -59,7 +60,7 @@ static bool	cmd_exist(char **path, t_shell *shell, char *cmd)
 		perror(*path);
 		free((*path));
 		(*path) = NULL;
-		shell->exit_code = 126;
+		g_signal_pid = 126;
 		return (false);
 	}
 	if (!check_dir(path, cmd, shell))
@@ -102,7 +103,7 @@ void	child_process(t_shell *shell, t_cmd *cmd, int *pip)
 
 	path = NULL;
 	if (cmd->skip_cmd)
-		shell->exit_code = 1;
+		g_signal_pid = 1;
 	else if (is_builtin(cmd->cmd_param[0]))
 		built(pip, cmd, shell);
 	else if (cmd_exist(&path, shell, cmd->cmd_param[0]))
@@ -118,5 +119,5 @@ void	child_process(t_shell *shell, t_cmd *cmd, int *pip)
 	}
 	if (path)
 		free(path);
-	free_all(shell, NULL, shell->exit_code);
+	free_all(shell, NULL, g_signal_pid);
 }

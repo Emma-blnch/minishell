@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:20:08 by skassimi          #+#    #+#             */
-/*   Updated: 2025/02/24 11:59:25 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/27 11:20:16 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,16 @@ void	extract_env_as_linked_list(t_shell *shell)
 	}
 }
 
-int	env(t_list *env)
+int	env(t_list *env, char **cmd)
 {
 	t_list	*temp;
 
 	temp = env;
+	if (cmd[1])
+	{
+		print_error2("env: too many arguments\n");
+		return (1);
+	}
 	if (!temp)
 		return (0);
 	if (ft_strchr(temp->str, '='))

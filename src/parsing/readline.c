@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:49:13 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/26 16:44:16 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 10:15:42 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,57 +25,22 @@ void	print_token(t_token *token)
 	printf("Type : %d, [%s]\n",  tmp->type, tmp->str);
 }
 
-/*bool	operator_error(t_shell *shell)
+static int check_double_dollar(char *line)
 {
-	//printf("hello\n");
-	if (shell->token && shell->token->prev && shell->token->type == PIPE)
-	{
-    	if (shell->token->prev->type == PIPE)
-    	{
-        	printf("Double pipe detected!\n");  // Vérification de l'entrée dans la condition
-        	write(2, "Error: Double pipe '||' detected\n", 33);
-        	shell->exit_code = 2;
-        	free_token(&shell->token);
-        	return (false);
-    	}
-	}
-	if (shell->token && shell->token->prev->type == PIPE)
-	{
-		write(2, "Error: Unclosed pipe\n", 21);
-		shell->exit_code = 2;
-		free_token(&shell->token);
-		return (false);
-	}
-	if (shell->token && shell->token->prev->type == APPEND)
-	{
-		write(2, "Error: Unclosed append\n", 21);
-		shell->exit_code = 2;
-		free_token(&shell->token);
-		return (false);
-	}
-	if (shell->token && shell->token->prev->type == HEREDOC)
-	{
-		write(2, "Error: Unclosed heredoc\n", 21);
-		shell->exit_code = 2;
-		free_token(&shell->token);
-		return (false);
-	}
-	if (shell->token && shell->token->prev->type == INPUT)
-	{
-		write(2, "Error: Unclosed input\n", 21);
-		shell->exit_code = 2;
-		free_token(&shell->token);
-		return (false);
-	}
-	if (shell->token && shell->token->prev->type == TRUNC)
-	{
-		write(2, "Error: Unclosed trunc\n", 21);
-		shell->exit_code = 2;
-		free_token(&shell->token);
-		return (false);
-	}
-	return (true);
-}*/
+    int i;
+
+    i = 0;
+    while (line[i])
+    {
+        if (line[i] == '$' && line[i + 1] == '$')
+        {
+            ft_putstr_fd("minishell: syntax error: $$\n", 2);
+            return (1);
+        }
+        i++;
+    }
+    return (0);
+}
 
 bool	check_pipe(t_shell *shell)
 {
@@ -111,13 +76,18 @@ bool	parse_cmd(t_shell *shell, char *input)
 		free(input);
 		return (false);
 	}
+	if (check_double_dollar(input))
+	{
+		free(input);
+		return (false);
+	}
 	if (!replace_dollar(&input, shell) || !create_list_token(&shell->token, input))
 	{
 		free(input);
 		free_all(shell, ERR_MALLOC, EXT_MALLOC);
 	}
 	free(input);
-	print_token(shell->token);
+	//print_token(shell->token);
 	if (!shell->token || !create_list_cmd(shell))
 	{
 		free_token(&shell->token);
@@ -135,7 +105,7 @@ int	init_readline(t_shell *shell)
 	{
 		input = readline("minishell$ ");
 		if (!input)
-			free_all(shell, "exit\n", shell->exit_code);
+			free_all(shell, "exit\n", g_signal_pid);
 		if (empty_input(input))
 			continue;
 		add_history(input);

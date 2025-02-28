@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:19:57 by skassimi          #+#    #+#             */
-/*   Updated: 2025/02/24 13:09:12 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/27 10:58:58 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ static bool	unset(char *str, t_list **env)
 		return (false);
 	if (!syntax(str))
 	{
-		print_error2("unset: invalid identifier\n");
-		return (true);
+		//print_error2("unset: invalid identifier\n");
+		return (false);
 	}
 	pos = exist(str, (*env));
 	if (pos == -1)

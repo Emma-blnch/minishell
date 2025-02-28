@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 09:37:18 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/24 10:19:32 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/27 14:17:08 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static bool	norm(t_shell *shell, t_token *tmp)
 		free_all(shell, ERR_MALLOC, EXT_MALLOC);
 	if (!fill_cmd(shell, tmp))
 	{
-		shell->exit_code = 2;
+		g_signal_pid = 2;
 		return (false);
 	}
 	return (true);

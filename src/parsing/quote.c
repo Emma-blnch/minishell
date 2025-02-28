@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 09:01:57 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/24 14:26:33 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/27 14:19:36 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	open_quote(t_shell *shell, char *input)
 	bool	simple_quote;
 	int		i;
 
+	(void)shell;
 	i = 0;
 	double_quote = false;
 	simple_quote = false;
@@ -52,7 +53,7 @@ int	open_quote(t_shell *shell, char *input)
 	if (double_quote || simple_quote)
 	{
 		print_error2("err : open quote\n");
-		shell->exit_code = 2;
+		g_signal_pid = 2;
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 09:15:25 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/26 16:30:03 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 10:14:18 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static int	dollar_point_interrogation(t_shell *shell, char **str)
 	char	*tmp;
 	char	*tmp2;
 
-	tmp = ft_itoa(shell->exit_code);
+	(void)shell;
+	tmp = ft_itoa(g_signal_pid);
 	if (!tmp)
 		return (0);
 	tmp2 = ft_strjoin(*str, tmp);
@@ -95,31 +96,44 @@ int	add_char(char *c, char **str, t_shell *shell, int *index)
 	return (1);
 }
 
-int	replace_dollar(char **line, t_shell *shell)
+static int process_dollar(char **line, t_shell *shell, char **str)
 {
-    bool	dq;
-    int		i;
-    char	*str;
+    bool    dq;
+    int     i;
 
     i = 0;
     dq = false;
     shell->squote = false;
-    str = ft_strdup("");
     while ((*line)[i])
     {
         quoting_choice(&dq, &shell->squote, NULL, (*line)[i]);
-        if ((*line)[i] == '$' && !shell->squote && (ft_isalpha((*line)[i + 1]) || (*line)[i + 1] == '?' || (*line)[i + 1] == '_'))
+        if ((*line)[i] == '$' && !shell->squote && 
+            (ft_isalpha((*line)[i + 1]) || (*line)[i + 1] == '?' || (*line)[i + 1] == '_'))
         {
-            if (!add_dollar((*line), &i, &str, shell))
+            if (!add_dollar((*line), &i, str, shell))
                 return (0);
         }
         else
         {
-            if (!add_char(&(*line)[i], &str, shell, &i))
+            if (!add_char(&(*line)[i], str, shell, &i))
                 return (0);
         }
     }
+    return (1);
+}
+
+int replace_dollar(char **line, t_shell *shell)
+{
+    char    *str;
+
+    str = ft_strdup("");
+    if (!str)
+        return (0);
+    if (!process_dollar(line, shell, &str))
+        return (0);
     free(*line);
     *line = str;
     return (1);
 }
+
+

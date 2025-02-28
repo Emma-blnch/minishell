@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:20:16 by skassimi          #+#    #+#             */
-/*   Updated: 2025/02/24 12:58:58 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/27 14:17:17 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_exit(t_shell *shell, char **args)
 
 	ret = 0;
 	err = 0;
+	printf("exit\n");
 	if (args[1])
 	{
 		ret = almost_atoi(args[1], &err);
@@ -59,10 +60,10 @@ void	ft_exit(t_shell *shell, char **args)
 	if (args[1] && args[2])
 	{
 		print_error2("exit: too many arguments\n");
-		shell->exit_code = 1;
+		g_signal_pid = 1;
 		return ;
 	}
 	if (!args[1])
-		free_all(shell, NULL, shell->exit_code);
+		free_all(shell, NULL, g_signal_pid);
 	free_all(shell, NULL, ret);
 }

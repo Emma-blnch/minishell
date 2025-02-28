@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:47:21 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/26 16:41:34 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/27 14:17:11 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	wait_all(t_shell *shell)
 		if (pid == g_signal_pid)
 		{
 			if (WIFEXITED(status))
-				shell->exit_code = WEXITSTATUS(status);
+				g_signal_pid = WEXITSTATUS(status);
 		}
 		if (tmp->outfile >= 0)
 			close(tmp->outfile);
@@ -93,7 +93,7 @@ int	exec_tree(t_shell *shell)
 
 	pip = shell->pip;
 	tmp = shell->cmd;
-	printf("cmd_param:%s\n", tmp->cmd_param[0]);
+	//printf("cmd_param:%s\n", tmp->cmd_param[0]);
 	if (tmp && tmp->skip_cmd == false && tmp->next == tmp && tmp->cmd_param[0] \
 		&& is_builtin(tmp->cmd_param[0]))
 		return (launch_builtin(shell, tmp));

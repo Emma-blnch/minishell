@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:02:49 by skassimi          #+#    #+#             */
-/*   Updated: 2025/02/26 16:35:45 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/27 12:04:28 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <sys/stat.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "/home/akim/42/minishell/inc/libft/inc/libft.h"
-//# include "/home/ahamini/Documents/minishell/inc/libft/inc/libft.h"
+# include "/home/ahamini/Documents/minishell2/inc/libft/inc/libft.h"
+//# include "/home/akim/42/minishell/inc/libft/inc/libft.h"
 
 extern pid_t	g_signal_pid;
 
@@ -118,7 +118,7 @@ char		*find_cmd(t_shell *shell, char *sample, t_list *env);
 
 int			cd(t_shell *shell, char **params);
 int			echo(char **argv);
-int			env(t_list *env);
+int			env(t_list *env, char **cmd);
 int			export(char **str, t_list **env);
 bool		export2(char *str, t_list **env);
 int			ft_unset(char **str, t_list **env);
