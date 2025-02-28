@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 09:37:18 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/27 14:17:08 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 11:31:35 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ bool	create_list_cmd(t_shell *shell)
 	if (!norm(shell, tmp))
 		return (false);
 	tmp = tmp->next;
-	while (tmp !=shell->token)
+	while (tmp != shell->token)
 	{
 		if (tmp->prev->type == PIPE)
 		{

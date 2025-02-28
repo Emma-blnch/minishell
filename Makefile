@@ -6,7 +6,7 @@
 #    By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/26 15:54:29 by ahamini           #+#    #+#              #
-#    Updated: 2025/02/26 16:46:24 by ahamini          ###   ########.fr        #
+#    Updated: 2025/02/28 13:35:36 by ahamini          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,15 +37,18 @@ MAIN		=	main.c
 
 FUNC_EXEC	= 	execution.c \
 				exec2.c \
+				exec_utils.c \
 				find_cmd.c \
 				setup.c \
 				heredoc.c
 
 				
 FUNC_PARS	=	cleanup.c \
+				cleanup2.c \
 				cmd_fd.c \
 				cmd_utils.c \
 				dollar_utils.c \
+				dollar_utils2.c \
 				errors.c \
 				manage_dollar.c \
 				parse_cmd.c \

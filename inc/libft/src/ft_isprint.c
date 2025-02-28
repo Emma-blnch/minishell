@@ -6,16 +6,9 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:28:46 by mkling            #+#    #+#             */
-/*   Updated: 2025/02/26 14:12:58 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 11:02:57 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (2048);
-	return (0);
-}*/
 
 int	ft_isprint(int c)
 {
@@ -44,4 +37,3 @@ int	ft_tolower(int c)
 		return (c + ' ');
 	return (c);
 }
-

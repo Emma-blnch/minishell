@@ -6,10 +6,9 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:02:49 by skassimi          #+#    #+#             */
-/*   Updated: 2025/02/27 12:04:28 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 13:41:21 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -46,9 +45,6 @@ typedef struct s_cmd
 	char			**cmd_param;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
-	//size_t			cmd_index;
-	//t_list			*infiles;
-	//t_list			*outfiles;
 }				t_cmd;
 
 typedef struct s_shell
@@ -60,6 +56,7 @@ typedef struct s_shell
 	int				pip[2];
 	int				std_in;
 	int				std_out;
+	int				ret;	
 	bool			squote;
 	char			**paths;
 	char			**envp;
@@ -84,6 +81,7 @@ int			add_char(char *c, char **str, t_shell *shell, int *index);
 int			add_dollar(char *line, int *index, char **str, t_shell *shell);
 char		*get_dollar_word(char *line, int size);
 char		*get_elem_env(t_list *env, char *key);
+int			in_env(t_shell *shell, char *line, int size, char **str);
 int			exist_in_env(char *line, int *i, t_shell *shell);
 size_t		len_list(t_list *list);
 bool		create_list_token(t_token **begin, char *command);
@@ -98,7 +96,7 @@ char		**get_param(t_shell *shell, t_token *token);
 
 /* HEREDOC */
 
-int	here_doc(t_shell *shell, char *word);
+int			here_doc(t_shell *shell, char *word);
 
 /* EXECUTION */
 
@@ -107,7 +105,7 @@ int			append(t_list **list, char *elem);
 char		**lst_to_arr(t_list *env);
 void		child_process(t_shell *shell, t_cmd *cmd, int *pip);
 void		absolute_path(char **path, char *cmd, t_shell *shell);
-char		*find_cmd(t_shell *shell, char *sample, t_list *env);
+char		*find_cmd(char *sample, t_list *env);
 //int			exec_pipe(t_shell *shell, t_tree *tree);
 //int			exec_one_cmd(t_shell *shell, t_tree *tree, bool piped);
 //int			create_process_or_pipe(t_shell *shell, int *fd, bool is_pipe);
@@ -121,6 +119,7 @@ int			echo(char **argv);
 int			env(t_list *env, char **cmd);
 int			export(char **str, t_list **env);
 bool		export2(char *str, t_list **env);
+void		sort_array(char **arr, int len);
 int			ft_unset(char **str, t_list **env);
 t_list		*find_env(t_list *env_list, char *env_name);
 int			pwd(void);
@@ -158,11 +157,10 @@ int			free_list(t_list **list);
 
 /* SIGNALS */
 
-void	clear_rl_line(void);
-void	signals(void);
-void	handle_sigtstp(int code);
-void	signals2(void);
-
+void		clear_rl_line(void);
+void		signals(void);
+void		handle_sigtstp(int code);
+void		signals2(void);
 
 /* DEBUG */
 

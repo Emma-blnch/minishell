@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:19:21 by skassimi          #+#    #+#             */
-/*   Updated: 2025/02/24 11:47:30 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 11:03:47 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,3 @@ int	echo(char **args)
 	write_echo(count, i, new_line, args);
 	return (0);
 }
-
-
-

@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:48:24 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/27 14:18:39 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 11:59:12 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,13 @@ static char	*cmd_not_found(char *sample)
 	return (NULL);
 }
 
-char	*find_cmd(t_shell *shell, char *sample, t_list *env)
+char	*find_cmd(char *sample, t_list *env)
 {
 	char		*paths;
 	char		path[PATH_MAX];
 	int			i;
 	int			len;
 
-	(void)shell;
 	paths = create_paths(env, len_list(env));
 	if (!paths || ft_strlen(sample) > PATH_MAX / 2)
 		return (cmd_not_found(sample));

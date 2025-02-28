@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_add.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skassimi <skassimi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/01/09 14:10:23 by skassimi         ###   ########.fr       */
+/*   Created: 2025/02/28 10:58:22 by ahamini           #+#    #+#             */
+/*   Updated: 2025/02/28 10:58:24 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <stdlib.h>
 #include "../inc/libft.h"

@@ -6,25 +6,11 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:44:19 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/27 14:18:05 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 11:57:17 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	absolute_path(char **path, char *cmd, t_shell *shell)
-{
-	*path = ft_strdup(cmd);
-	if (!(*path))
-		free_all(shell, ERR_MALLOC, EXT_MALLOC);
-	if (access((*path), F_OK))
-	{
-		write(2, (*path), ft_strlen((*path)));
-		write(2, " : command not found\n", 21);
-		free(*path);
-		*path = NULL;
-	}
-}
 
 static bool	check_dir(char **path, char *cmd, t_shell *shell)
 {
@@ -45,7 +31,7 @@ static bool	check_dir(char **path, char *cmd, t_shell *shell)
 static bool	cmd_exist(char **path, t_shell *shell, char *cmd)
 {
 	if (!ft_strchr(cmd, '/'))
-		*path = find_cmd(shell, cmd, shell->env);
+		*path = find_cmd(cmd, shell->env);
 	else
 		absolute_path(path, cmd, shell);
 	if (!(*path) && g_signal_pid == -1)

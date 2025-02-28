@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:20:08 by skassimi          #+#    #+#             */
-/*   Updated: 2025/02/27 11:20:16 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 11:04:36 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	extract_env_as_linked_list(t_shell *shell)
 	while (shell->envp[index])
 	{
 		ft_lstadd_back(&shell->env,
-			ft_lstnew(ft_strdup(shell->envp[index])),ENV);
+			ft_lstnew(ft_strdup(shell->envp[index])), ENV);
 		index++;
 	}
 }

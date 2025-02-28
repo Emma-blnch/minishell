@@ -6,13 +6,13 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:19:31 by skassimi          #+#    #+#             */
-/*   Updated: 2025/02/24 08:40:06 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 10:57:37 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef LIBFT_H
 # define LIBFT_H
+
 # include <stdlib.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -92,4 +92,4 @@ int		ft_atoi_base(char *str, char *base);
 void	ft_lstpop(t_list **head, t_list *node, void (*del)(void *));
 int		ft_iseven(int num);
 
-# endif
+#endif

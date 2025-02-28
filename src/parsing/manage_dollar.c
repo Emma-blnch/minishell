@@ -6,33 +6,11 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 09:15:25 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/28 10:14:18 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 13:47:53 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	in_env(t_shell *shell, char *line, int size, char **str)
-{
-	char	*tmp;
-	char	*key;
-	char	*value;
-
-	key = get_dollar_word(line, size);
-	value = get_elem_env(shell->env, key);
-	if (!value)
-		value = ft_strdup("");
-	if (key)
-		free(key);
-	tmp = ft_strjoin(*str, value);
-	if (value)
-		free(value);
-	free(*str);
-	if (!tmp)
-		return (0);
-	*str = tmp;
-	return (1);
-}
 
 static int	dollar_point_interrogation(t_shell *shell, char **str)
 {
@@ -96,44 +74,43 @@ int	add_char(char *c, char **str, t_shell *shell, int *index)
 	return (1);
 }
 
-static int process_dollar(char **line, t_shell *shell, char **str)
+static int	process_dollar(char **line, t_shell *shell, char **str)
 {
-    bool    dq;
-    int     i;
+	int		i;
+	bool	dq;
 
-    i = 0;
-    dq = false;
-    shell->squote = false;
-    while ((*line)[i])
-    {
-        quoting_choice(&dq, &shell->squote, NULL, (*line)[i]);
-        if ((*line)[i] == '$' && !shell->squote && 
-            (ft_isalpha((*line)[i + 1]) || (*line)[i + 1] == '?' || (*line)[i + 1] == '_'))
-        {
-            if (!add_dollar((*line), &i, str, shell))
-                return (0);
-        }
-        else
-        {
-            if (!add_char(&(*line)[i], str, shell, &i))
-                return (0);
-        }
-    }
-    return (1);
+	i = 0;
+	dq = false;
+	shell->squote = false;
+	while ((*line)[i])
+	{
+		quoting_choice(&dq, &shell->squote, NULL, (*line)[i]);
+		if ((*line)[i] == '$' && !shell->squote &&
+			(ft_isalpha((*line)[i + 1]) || (*line)[i + 1] == '?'
+			|| (*line)[i + 1] == '_'))
+		{
+			if (!add_dollar((*line), &i, str, shell))
+				return (0);
+		}
+		else
+		{
+			if (!add_char(&(*line)[i], str, shell, &i))
+				return (0);
+		}
+	}
+	return (1);
 }
 
-int replace_dollar(char **line, t_shell *shell)
+int	replace_dollar(char **line, t_shell *shell)
 {
-    char    *str;
+	char	*str;
 
-    str = ft_strdup("");
-    if (!str)
-        return (0);
-    if (!process_dollar(line, shell, &str))
-        return (0);
-    free(*line);
-    *line = str;
-    return (1);
+	str = ft_strdup("");
+	if (!str)
+		return (0);
+	if (!process_dollar(line, shell, &str))
+		return (0);
+	free(*line);
+	*line = str;
+	return (1);
 }
-
-

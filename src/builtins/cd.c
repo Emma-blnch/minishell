@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:19:30 by skassimi          #+#    #+#             */
-/*   Updated: 2025/02/26 16:37:13 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 13:27:01 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,9 @@ static void	error_malloc(void)
 
 static void	update_oldpwd(t_shell *shell)
 {
-	//t_list	*tmp;
 	char	cwd[PATH_MAX];
 	char	*oldpwd;
 
-	//tmp = shell->env;
 	if (getcwd(cwd, PATH_MAX) == NULL)
 		return ;
 	oldpwd = ft_strjoin("OLDPWD=", cwd);
@@ -70,9 +68,10 @@ int	cd(t_shell *shell, char **params)
 
 	path = NULL;
 	allocated = false;
-	if (count_arg(params) == 1 || (count_arg(params) == 2 && !ft_strncmp(params[1], "~", 2))) //Cas `cd` ou `cd ~` : aller à `$HOME`
+	if (count_arg(params) == 1 || (count_arg(params) == 2
+			&& !ft_strncmp(params[1], "~", 2))) //Cas `cd` ou `cd ~` : aller à `$HOME`
 	{
-	path = get_elem_env(shell->env, "HOME");
+		path = get_elem_env(shell->env, "HOME");
 		if (!path)
 		{
 			printf("cd: HOME not set\n");

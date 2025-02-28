@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 14:47:23 by mkling            #+#    #+#             */
-/*   Updated: 2025/02/26 14:11:35 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 11:02:46 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,6 @@ int	ft_isalpha(int c)
 int	ft_isalnum(int c)
 {
 	if (ft_isalpha((unsigned char)c) || ft_isdigit((unsigned char)c))
-		return (1);
-	return (0);
-}
-
-int	ft_ishexa(int c)
-{
-	if (((c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F'))
-		|| (c >= '0' && c <= '9'))
 		return (1);
 	return (0);
 }

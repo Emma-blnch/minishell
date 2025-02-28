@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:20:16 by skassimi          #+#    #+#             */
-/*   Updated: 2025/02/27 14:17:17 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 11:08:32 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,13 @@ static int	almost_atoi(char *str, int *err)
 
 void	ft_exit(t_shell *shell, char **args)
 {
-	int	ret;
 	int	err;
 
-	ret = 0;
 	err = 0;
 	printf("exit\n");
 	if (args[1])
 	{
-		ret = almost_atoi(args[1], &err);
+		shell->ret = almost_atoi(args[1], &err);
 		if (err)
 		{
 			print_error2("exit: ");
@@ -65,5 +63,5 @@ void	ft_exit(t_shell *shell, char **args)
 	}
 	if (!args[1])
 		free_all(shell, NULL, g_signal_pid);
-	free_all(shell, NULL, ret);
+	free_all(shell, NULL, shell->ret);
 }

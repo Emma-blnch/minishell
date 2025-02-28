@@ -6,13 +6,13 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:49:13 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/28 10:15:42 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 13:49:16 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_token(t_token *token)
+/*void	print_token(t_token *token)
 {
 	t_token	*tmp;
 
@@ -22,24 +22,25 @@ void	print_token(t_token *token)
 		printf("Type : %d, [%s]\n", tmp->type, tmp->str);
 		tmp = tmp->next;
 	}
-	printf("Type : %d, [%s]\n",  tmp->type, tmp->str);
-}
+	printf("Type : %d, [%s]\n", tmp->type, tmp->str);
+}*/
 
-static int check_double_dollar(char *line)
+static int	check_double_dollar(char *line)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (line[i])
-    {
-        if (line[i] == '$' && line[i + 1] == '$')
-        {
-            ft_putstr_fd("minishell: syntax error: $$\n", 2);
-            return (1);
-        }
-        i++;
-    }
-    return (0);
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '$' && line[i + 1] == '$')
+		{
+			ft_putstr_fd("PID: command not found\n", 2);
+			g_signal_pid = 127;
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }
 
 bool	check_pipe(t_shell *shell)
@@ -81,7 +82,8 @@ bool	parse_cmd(t_shell *shell, char *input)
 		free(input);
 		return (false);
 	}
-	if (!replace_dollar(&input, shell) || !create_list_token(&shell->token, input))
+	if (!replace_dollar(&input, shell)
+		|| !create_list_token(&shell->token, input))
 	{
 		free(input);
 		free_all(shell, ERR_MALLOC, EXT_MALLOC);
@@ -107,10 +109,10 @@ int	init_readline(t_shell *shell)
 		if (!input)
 			free_all(shell, "exit\n", g_signal_pid);
 		if (empty_input(input))
-			continue;
+			continue ;
 		add_history(input);
 		if (!parse_cmd(shell, input))
-			continue;
+			continue ;
 		if (!exec_tree(shell))
 			free_all(shell, ERR_PIPE, EXT_PIPE);
 		free_cmd(&shell->cmd);

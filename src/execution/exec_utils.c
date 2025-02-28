@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 10:59:29 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/28 10:59:45 by ahamini          ###   ########.fr       */
+/*   Created: 2025/02/28 11:16:24 by ahamini           #+#    #+#             */
+/*   Updated: 2025/02/28 11:16:42 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
-#include <stdlib.h>
+#include "minishell.h"
 
-void	ft_bzero(void *ptr, unsigned long len)
+void	absolute_path(char **path, char *cmd, t_shell *shell)
 {
-	unsigned char	*str;
-
-	str = ptr;
-	while (len--)
-		*str++ = 0;
-}
-
-void	*ft_calloc(size_t nbr, size_t size)
-{
-	void	*result;
-
-	if (nbr == 0 || size == 0 || ((size_t) - 1 / nbr) < size)
-		return (malloc(0));
-	result = malloc(nbr * size);
-	if (!result)
-		return (NULL);
-	ft_bzero(result, nbr * size);
-	return (result);
+	*path = ft_strdup(cmd);
+	if (!(*path))
+		free_all(shell, ERR_MALLOC, EXT_MALLOC);
+	if (access((*path), F_OK))
+	{
+		write(2, (*path), ft_strlen((*path)));
+		write(2, " : command not found\n", 21);
+		free(*path);
+		*path = NULL;
+	}
 }

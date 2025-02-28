@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:48:36 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/24 10:17:52 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 11:25:38 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,6 @@
 
 /*if (shell->paths)
 		ft_free_tab(shell->paths);*/
-
-int	free_list(t_list **list)
-{
-	t_list	*tmp;
-	t_list	*current;
-
-	if (!(*list))
-		return (0);
-	current = *list;
-	while (current->next != *list)
-	{
-		tmp = current;
-		current = current->next;
-		free(tmp->str);
-		free(tmp);
-	}
-	free(current->str);
-	free(current);
-	*list = NULL;
-	return (0);
-}
 
 void	free_token(t_token **list)
 {

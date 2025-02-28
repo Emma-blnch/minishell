@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:46:35 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/27 14:15:44 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 11:03:34 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	launch_builtin(t_shell *shell, t_cmd *cmd)
 	}
 	return (true);
 }
+
 int	is_builtin(char *cmd)
 {
 	if (!cmd)
@@ -66,4 +67,3 @@ int	is_builtin(char *cmd)
 		return (true);
 	return (false);
 }
-

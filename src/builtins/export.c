@@ -6,44 +6,11 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:19:50 by skassimi          #+#    #+#             */
-/*   Updated: 2025/02/24 13:06:18 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 11:10:24 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	ft_swap_str_tab(int i, int j, char **tab)
-{
-	char	*temp;
-
-	temp = tab[i];
-	tab[i] = tab[j];
-	tab[j] = temp;
-}
-
-void	sort_array(char **arr, int len)
-{
-	int	i;
-	int	j;
-	int	diff;
-
-	i = 0;
-	while (i < len)
-	{
-		j = i + 1;
-		while (j < len)
-		{
-			diff = ft_strncmp(arr[i], arr[j], __INT_MAX__);
-			if (diff > 0)
-			{
-				ft_swap_str_tab(i, j, arr);
-				continue ;
-			}
-			j++;
-		}
-	i++;
-	}
-}
 
 static bool	export_no_args(t_list *env)
 {
