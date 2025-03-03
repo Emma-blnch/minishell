@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:44:19 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/28 11:57:17 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/03 09:26:16 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void	child_process(t_shell *shell, t_cmd *cmd, int *pip)
 		if (!env)
 			free_all(shell, ERR_MALLOC, EXT_MALLOC);
 		rl_clear_history();
-		signals();
 		execve(path, cmd->cmd_param, env);
 		free(env);
 	}

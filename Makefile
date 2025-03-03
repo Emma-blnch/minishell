@@ -6,7 +6,7 @@
 #    By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/26 15:54:29 by ahamini           #+#    #+#              #
-#    Updated: 2025/02/28 13:35:36 by ahamini          ###   ########.fr        #
+#    Updated: 2025/03/03 13:06:29 by ahamini          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,7 +88,7 @@ INC			= -I$(DIR_INC) -I$(DIR_LIB)
 
 CC			= cc
 
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g3
 
 # **************************************************************************** #
 #		Unit test variables													   #

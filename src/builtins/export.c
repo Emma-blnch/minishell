@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:19:50 by skassimi          #+#    #+#             */
-/*   Updated: 2025/02/28 11:10:24 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/03 10:07:11 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static bool	export_no_args(t_list *env)
 	char	**arr;
 	int		i;
 	int		j;
-
 	arr = lst_to_arr(env);
 	if (!arr)
 		return (false);
@@ -38,12 +37,10 @@ static bool	export_no_args(t_list *env)
 	free(arr);
 	return (true);
 }
-
 //checks syntax
 static bool	valid_identifier(char *str)
 {
 	int	i;
-
 	i = 0;
 	if (!str[0] || (str[0] != '_' && !ft_isalpha(str[0])))
 		return (false);
@@ -55,14 +52,12 @@ static bool	valid_identifier(char *str)
 	}
 	return (true);
 }
-
 //checks if identifier already in env
 static int	exist(char *str, t_list *env)
 {
 	int		i;
 	int		j;
 	t_list	*tmp;
-
 	if (!env)
 		return (-1);
 	i = 0;
@@ -85,14 +80,12 @@ static int	exist(char *str, t_list *env)
 	}
 	return (-1);
 }
-
 //export but norm
 bool	export2(char *str, t_list **env)
 {
 	int		pos;
 	int		i;
 	char	*value;
-
 	pos = exist(str, (*env));
 	value = ft_strdup(str);
 	if (!value)
@@ -113,13 +106,11 @@ bool	export2(char *str, t_list **env)
 			return (false);
 	return (true);
 }
-
 //export
 int	export(char **str, t_list **env)
 {
 	int	exit_code;
 	int	i;
-
 	exit_code = 0;
 	i = 1;
 	if (!str || !str[i])

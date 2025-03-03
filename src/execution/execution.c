@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:47:21 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/28 11:18:53 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/03 09:30:14 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	exec_tree(t_shell *shell)
 
 	pip = shell->pip;
 	tmp = shell->cmd;
+	signals2();
 	if (tmp && tmp->skip_cmd == false && tmp->next == tmp && tmp->cmd_param[0] \
 		&& is_builtin(tmp->cmd_param[0]))
 		return (launch_builtin(shell, tmp));

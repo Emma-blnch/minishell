@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:48:24 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/28 11:59:12 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/02/28 15:05:15 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static char	*create_paths(t_list *env, int len)
 static char	*cmd_not_found(char *sample)
 {
 	write(2, sample, ft_strlen(sample));
-	write(2, " : command not found\n", 21);
+	write(2, " : command not foundb\n", 22);
+	g_signal_pid = 127;
 	return (NULL);
 }
 

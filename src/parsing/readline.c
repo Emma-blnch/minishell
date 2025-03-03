@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:49:13 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/28 13:49:16 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/03 14:11:12 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ bool	parse_cmd(t_shell *shell, char *input)
 	{
 		free(input);
 		free_all(shell, ERR_MALLOC, EXT_MALLOC);
+		return (false);
 	}
 	free(input);
 	//print_token(shell->token);
@@ -117,7 +118,7 @@ int	init_readline(t_shell *shell)
 			free_all(shell, ERR_PIPE, EXT_PIPE);
 		free_cmd(&shell->cmd);
 		free_token(&shell->token);
-		g_signal_pid = 0;
+		//g_signal_pid = 0;
 	}
 	rl_clear_history();
 	free_all(shell, NULL, -1);

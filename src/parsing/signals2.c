@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:29:32 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/28 11:45:18 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/03 09:28:16 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,15 @@ void	handle_sigtstp(int code)
 	}
 }
 
+static void	handle_sigquit(int code)
+{
+	(void)code;
+	g_signal_pid = 131;
+	write(2, "Quit (core dumped)\n", 20);
+}
+
 void	signals2(void)
 {
 	signal(SIGQUIT, SIG_DFL);
+	signal(SIGQUIT, &handle_sigquit);
 }

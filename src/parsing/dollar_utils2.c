@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 13:34:56 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/28 13:40:51 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/03 13:29:02 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ size_t	len_list(t_list *list)
 	return (0);
 }
 
-static int	in_env(t_shell *shell, char *line, int size, char **str)
+int	in_env(t_shell *shell, char *line, int size, char **str)
 {
 	char	*tmp;
 	char	*key;
