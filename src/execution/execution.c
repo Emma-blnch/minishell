@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:47:21 by ahamini           #+#    #+#             */
-/*   Updated: 2025/03/03 09:30:14 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/10 10:21:54 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ static void	parent_process(t_shell *shell, t_cmd *cmd, int *pip)
 
 static bool	exec_cmd(t_shell *shell, t_cmd *cmd, int *pip)
 {
-	g_signal_pid = fork();
-	if (g_signal_pid < 0)
+	pid_t	pid;
+
+	pid = fork();
+	if (pid < 0)
 		free_all(shell, ERR_FORK, EXT_FORK);
-	else if (!g_signal_pid)
+	else if (!pid)
 	{
 		if (cmd->cmd_param && cmd->cmd_param[0])
 			child_process(shell, cmd, pip);

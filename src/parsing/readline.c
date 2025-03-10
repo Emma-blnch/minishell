@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:49:13 by ahamini           #+#    #+#             */
-/*   Updated: 2025/03/03 14:11:12 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/10 12:44:10 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,34 +70,52 @@ bool	empty_input(char *line)
 	return (false);
 }
 
-bool	parse_cmd(t_shell *shell, char *input)
+bool    check_syntax(char *input)
 {
-	if (open_quote(shell, input))
-	{
-		free(input);
-		return (false);
-	}
-	if (check_double_dollar(input))
-	{
-		free(input);
-		return (false);
-	}
-	if (!replace_dollar(&input, shell)
-		|| !create_list_token(&shell->token, input))
-	{
-		free(input);
-		free_all(shell, ERR_MALLOC, EXT_MALLOC);
-		return (false);
-	}
-	free(input);
+    t_token *tmp_token = NULL;
+
+    if (!create_list_token(&tmp_token, input))
+    {
+        free_token(&tmp_token); // Nettoyage minimal
+        return (false); // Erreur de syntaxe (ex: >>>)
+    }
+    free_token(&tmp_token);
+    return (true);
+}
+
+bool    parse_cmd(t_shell *shell, char *input)
+{
+    if (open_quote(shell, input))
+    {
+        free(input);
+        return (false);
+    }
+    if (check_double_dollar(input))
+    {
+        free(input);
+        return (false);
+    }
+    if (!check_syntax(input))
+    {
+        free(input);
+        return (false);
+    }
+    if (!replace_dollar(&input, shell)
+        || !create_list_token(&shell->token, input))
+    {
+        free(input);
+        free_all(shell, ERR_MALLOC, EXT_MALLOC);
+        return (false);
+    }
+    free(input);
 	//print_token(shell->token);
-	if (!shell->token || !create_list_cmd(shell))
-	{
-		free_token(&shell->token);
-		free_cmd(&shell->cmd);
-		return (false);
-	}
-	return (check_pipe(shell));
+    if (!shell->token || !create_list_cmd(shell))
+    {
+        free_token(&shell->token);
+        free_cmd(&shell->cmd);
+        return (false);
+    }
+    return (check_pipe(shell));
 }
 
 int	init_readline(t_shell *shell)
@@ -106,6 +124,7 @@ int	init_readline(t_shell *shell)
 
 	while (1)
 	{
+		signals();
 		input = readline("minishell$ ");
 		if (!input)
 			free_all(shell, "exit\n", g_signal_pid);

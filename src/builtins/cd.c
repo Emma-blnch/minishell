@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:19:30 by skassimi          #+#    #+#             */
-/*   Updated: 2025/03/03 11:12:16 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/10 12:44:12 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ static void	update_pwd(t_shell *shell, char *param)
 		perror(param);
 		return ;
 	}
-	printf("Mise à jour PWD: %s\n", cwd);
+	//printf("Mise à jour PWD: %s\n", cwd);
 	pwd = ft_strjoin("PWD=", cwd);
 	if (!pwd)
 		return (error_malloc());
-	printf("Chemin récupéré par getcwd: '%s'\n", cwd);  // Affiche le chemin exactement comme il est
+	//printf("Chemin récupéré par getcwd: '%s'\n", cwd);  // Affiche le chemin exactement comme il est
 	export2(pwd, &shell->env);
 	free(pwd);
 }

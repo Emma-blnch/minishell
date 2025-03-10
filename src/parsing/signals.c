@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 09:47:59 by skassimi          #+#    #+#             */
-/*   Updated: 2025/03/03 09:09:21 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/10 10:38:20 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	handle_sigint(int code)
 {
 	(void)code;
 	g_signal_pid = 130;
-	printf("\n");
+	write(1, "\n", 1);
 	clear_rl_line();
 	rl_redisplay();
 }

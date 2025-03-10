@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:02:49 by skassimi          #+#    #+#             */
-/*   Updated: 2025/02/28 13:41:21 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/10 12:11:18 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,5 +184,6 @@ void		print_tokens(t_list *first);
 # define EXT_PIPE		1
 # define EXT_FORK		1
 # define MALLOC_FAIL	1
+# define DEFAULT_PATH "PATH=/usr/bin"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 09:15:25 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/28 13:47:53 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/10 09:35:31 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ int	replace_dollar(char **line, t_shell *shell)
 {
 	char	*str;
 
+	if (ft_strnstr(*line, "<<", ft_strlen(*line)))
+		return (1);
 	str = ft_strdup("");
 	if (!str)
 		return (0);

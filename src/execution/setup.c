@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:48:17 by ahamini           #+#    #+#             */
-/*   Updated: 2025/03/03 11:22:29 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/10 12:10:32 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,38 +48,67 @@ int	append(t_list **list, char *elem)
 	return (1);
 }
 
-bool	make_env(t_shell *shell)
+bool    make_env(t_shell *shell)
 {
-	char	path[PATH_MAX];
-	char	*tmp;
+    char    path[PATH_MAX];
+    char    *tmp;
 
-	tmp = ft_strdup("OLDPWD");
-	if (!tmp || !append(&(shell->env), tmp) || getcwd(path, PATH_MAX) == NULL)
-		free_all(shell, ERR_MALLOC, EXT_MALLOC);
-	tmp = ft_strjoin("PWD=", path);
-	if (!tmp || !append(&(shell->env), tmp))
-		free_all(shell, ERR_MALLOC, EXT_MALLOC);
-	return (1);
+    tmp = ft_strdup("OLDPWD");
+    if (!tmp || !append(&(shell->env), tmp) || getcwd(path, PATH_MAX) == NULL)
+        free_all(shell, ERR_MALLOC, EXT_MALLOC);
+    tmp = ft_strjoin("PWD=", path);
+    if (!tmp || !append(&(shell->env), tmp))
+        free_all(shell, ERR_MALLOC, EXT_MALLOC);
+    tmp = ft_strdup(DEFAULT_PATH);
+    if (!tmp || !append(&(shell->env), tmp))
+        free_all(shell, ERR_MALLOC, EXT_MALLOC);
+    return (1);
 }
 
-int	create_minishell(t_shell *shell, char **env)
+static int    has_env_key(t_list *env, const char *key)
 {
-	t_list	*list;
-	int		i;
-	char	*tmp;
+    t_list    *tmp;
+    size_t    len;
 
-	if (!(*env))
-		return (make_env(shell));
-	i = -1;
-	list = NULL;
-	while (env[++i])
-	{
-		tmp = ft_strdup(env[i]);
-		if (!tmp)
-			return (free_list(&list));
-		if (!append(&list, tmp))
-			return (free_list(&list));
-	}
-	shell->env = list;
-	return (1);
+    if (!env)
+        return (0);
+    len = ft_strlen(key);
+    tmp = env;
+    while (1)
+    {
+        if (!ft_strncmp(tmp->str, key, len) && tmp->str[len] == '=')
+            return (1);
+        tmp = tmp->next;
+        if (tmp == env)
+            break;
+    }
+    return (0);
+}
+
+int    create_minishell(t_shell *shell, char **env)
+{
+    t_list    *list;
+    int        i;
+    char    *tmp;
+
+    if (!(*env))
+        return (make_env(shell));
+    i = -1;
+    list = NULL;
+    while (env[++i])
+    {
+        tmp = ft_strdup(env[i]);
+        if (!tmp)
+            return (free_list(&list));
+        if (!append(&list, tmp))
+            return (free_list(&list));
+    }
+    shell->env = list;
+    if (!has_env_key(shell->env, "PATH"))
+    {
+        tmp = ft_strdup(DEFAULT_PATH);
+        if (!tmp || !append(&shell->env, tmp))
+            return (free_list(&shell->env));
+    }
+    return (1);
 }

@@ -6,7 +6,7 @@
 #    By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 10:20:10 by mkling            #+#    #+#              #
-#    Updated: 2025/02/26 16:00:12 by ahamini          ###   ########.fr        #
+#    Updated: 2025/03/10 09:17:04 by ahamini          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ $(VERBOSE).SILENT:
 SRCS 	= ft_atoi.c ft_bubble_sort.c ft_calloc.c ft_free_tab.c ft_isalnum.c \
 		ft_isprint.c ft_itoa.c ft_lst_add.c ft_lst_iter.c ft_mem.c ft_minmax.c \
 		ft_put.c ft_split.c ft_str_comps.c ft_str_dups.c ft_str_iteri.c \
-		ft_strtrim.c ft_swap.c get_next_line.c ft_atoi_base.c
+		ft_strtrim.c ft_swap.c get_next_line.c ft_atoi_base.c ft_strnstr.c
 
 OBJS	= $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(addprefix $(SRC_DIR)/, $(SRCS)))
 

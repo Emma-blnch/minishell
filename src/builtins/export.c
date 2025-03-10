@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:19:50 by skassimi          #+#    #+#             */
-/*   Updated: 2025/03/03 10:07:11 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/10 12:11:39 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,30 +81,32 @@ static int	exist(char *str, t_list *env)
 	return (-1);
 }
 //export but norm
-bool	export2(char *str, t_list **env)
+bool    export2(char *str, t_list **env)
 {
-	int		pos;
-	int		i;
-	char	*value;
-	pos = exist(str, (*env));
-	value = ft_strdup(str);
-	if (!value)
-		return (false);
-	if (pos >= 0)
-	{
-		i = 0;
-		while (i < pos)
-		{
-			(*env) = (*env)->next;
-			i++;
-		}
-		free((*env)->str);
-		(*env)->str = value;
-	}
-	else if (pos == -1)
-		if (!append(env, value))
-			return (false);
-	return (true);
+    int        pos;
+    int        i;
+    char    *value;
+    pos = exist(str, (*env));
+    value = ft_strdup(str);
+    if (!value)
+        return (false);
+    if (pos >= 0)
+    {
+        if (!ft_strchr(str, '=')) // ajout pour pas ecraser valeurs avec export
+            return (free(value), true);
+        i = 0;
+        while (i < pos)
+        {
+            (*env) = (*env)->next;
+            i++;
+        }
+        free((*env)->str);
+        (*env)->str = value;
+    }
+    else if (pos == -1)
+        if (!append(env, value))
+            return (false);
+    return (true);
 }
 //export
 int	export(char **str, t_list **env)

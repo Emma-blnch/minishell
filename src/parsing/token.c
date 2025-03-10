@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:49:44 by ahamini           #+#    #+#             */
-/*   Updated: 2025/03/03 14:30:44 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/10 12:06:18 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,41 +116,49 @@ static bool	add_special(t_token **begin, char **command)
 	return (true);
 }
 
-bool	create_list_token(t_token **begin, char *command)
+bool create_list_token(t_token **begin, char *command)
 {
-	(*begin) = NULL;
-	int last_was_operator = 0;
-	while (*command)
-	{
-		while (is_space(*command))
-			command++;
-		if (*command == '\0')
-			break;
-		if (is_special(command))
-		{
-			if (last_was_operator)
-			{
-				write(2, "Error: Unexpected token after operator\n", 39);
-				free_token(begin);
-			}
-			if (!add_special(begin, &command))
-			{
-				free_token(begin);
-				return (false);
-			}
-			last_was_operator = 1;
-		}
-		else
-		{
-			if (!add_cmd(begin, &command))
-			{
-				free_token(begin);
-				return (false);
-			}
-			last_was_operator = 0;
-		}
-		if (*command != '\0')
-			command++;
-	}
-	return (true);
+    (*begin) = NULL;
+    int last_was_operator = 0;
+    while (*command)
+    {
+        while (is_space(*command))
+            command++;
+        if (*command == '\0')
+            break;
+        if (is_special(command) == -1)
+        {
+            write(2, "syntax error near unexpected token `>>'\n", 41);
+            free_token(begin);
+            return (false);
+        }
+        if (is_special(command))
+        {
+            if (last_was_operator)
+            {
+                write(2, "syntax error near unexpected token `>>'\n", 41);
+                free_token(begin);
+                return (false);
+            }
+            if (!add_special(begin, &command))
+            {
+                free_token(begin);
+                return (false);
+            }
+            last_was_operator = 1;
+        }
+        else
+        {
+            if (!add_cmd(begin, &command))
+            {
+                free_token(begin);
+                return (false);
+            }
+            last_was_operator = 0;
+        }
+        //if (*command != '\0')
+            //command++;
+    }
+    return (true);
 }
+

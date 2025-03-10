@@ -6,11 +6,9 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:29:32 by ahamini           #+#    #+#             */
-/*   Updated: 2025/03/03 09:28:16 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/10 11:03:13 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "minishell.h"
 
 #include "minishell.h"
 
@@ -45,4 +43,5 @@ void	signals2(void)
 {
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGQUIT, &handle_sigquit);
+	//signal(SIGINT, SIG_DFL);
 }

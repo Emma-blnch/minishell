@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:50:04 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/28 11:08:00 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/10 10:22:34 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	main(int argc, char **argv, char **envp)
 	shell.pip[1] = -1;
 	shell.ret = 0;
 	g_signal_pid = 0;
-	signals();
 	if (!create_minishell(&shell, envp))
 		free_all(&shell, ERR_MALLOC, EXT_MALLOC);
 	init_readline(&shell);
