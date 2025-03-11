@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:02:49 by skassimi          #+#    #+#             */
-/*   Updated: 2025/03/10 12:11:18 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/11 13:55:13 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,14 @@ typedef struct s_shell
 	t_list			*env;
 	t_token			*token;
 	t_cmd			*cmd;
+	pid_t			pid;
 	int				exit_code;
 	int				pip[2];
 	int				std_in;
 	int				std_out;
 	int				ret;	
 	bool			squote;
+	bool			heredoc_interrupted;
 	char			**paths;
 	char			**envp;
 }				t_shell;
@@ -160,6 +162,7 @@ int			free_list(t_list **list);
 void		clear_rl_line(void);
 void		signals(void);
 void		handle_sigtstp(int code);
+void		handle_sigint(int code);
 void		signals2(void);
 
 /* DEBUG */
