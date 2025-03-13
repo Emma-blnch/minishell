@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   setup_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/13 08:15:04 by ahamini           #+#    #+#             */
-/*   Updated: 2025/03/13 08:25:12 by ahamini          ###   ########.fr       */
+/*   Created: 2025/03/13 10:49:32 by ahamini           #+#    #+#             */
+/*   Updated: 2025/03/13 10:50:08 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
+#include "minishell.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+void	add_first2(t_list **list, t_list *new)
 {
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	if (!*needle)
-		return ((char *)haystack);
-	while (haystack[i] && i < len)
-	{
-		j = 0;
-		while (haystack[i + j] == needle[j] && i + j < len)
-		{
-			j++;
-			if (!needle[j])
-				return ((char *)haystack + 1);
-		}
-		i++;
-	}
-	return (NULL);
+	(*list) = new;
+	(*list)->prev = *list;
+	(*list)->next = *list;
 }

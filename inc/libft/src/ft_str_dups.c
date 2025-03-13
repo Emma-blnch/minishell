@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:03:46 by mkling            #+#    #+#             */
-/*   Updated: 2025/03/03 13:22:41 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/13 08:00:17 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str[i + j] = '\0';
 	return (str);
 }
-
 
 char	*ft_strdup(const char *src)
 {

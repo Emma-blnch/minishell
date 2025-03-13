@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 09:27:59 by ahamini           #+#    #+#             */
-/*   Updated: 2025/03/03 14:24:31 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/13 10:49:05 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ bool	is_space(char c)
 int	is_special(char *str)
 {
 	if (str[0] == '>' && str[1] == '>' && str[2] == '>')
-        return (-1);
+		return (-1);
 	if (str && *str && ft_strlen(str) >= 2)
 	{
 		if (!ft_strncmp(str, "<<", 2))

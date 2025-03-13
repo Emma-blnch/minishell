@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:46:35 by ahamini           #+#    #+#             */
-/*   Updated: 2025/02/28 11:03:34 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/13 10:58:27 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	exec_builtin(int save_stdout, t_shell *shell, t_cmd *cmd)
 	else if (!ft_strncmp("cd", cmd->cmd_param[0], INT_MAX))
 		g_signal_pid = cd(shell, cmd->cmd_param);
 	else if (!ft_strncmp("pwd", cmd->cmd_param[0], INT_MAX))
-		g_signal_pid = pwd();
+		g_signal_pid = pwd(cmd->cmd_param);
 	else if (!ft_strncmp("export", cmd->cmd_param[0], INT_MAX))
 		g_signal_pid = export(cmd->cmd_param, &shell->env);
 	else if (!ft_strncmp("unset", cmd->cmd_param[0], INT_MAX))

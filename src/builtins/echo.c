@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:19:21 by skassimi          #+#    #+#             */
-/*   Updated: 2025/02/28 11:03:47 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/13 08:34:05 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	check_new_line(char *str)
 	int	i;
 
 	i = 0;
-	if (str[i] && str[i] == '-')
+	if (str[i] && str[i] == '-' && str[i + 1] == 'n')
 	{
 		++i;
 		while (str[i] && str[i] == 'n')

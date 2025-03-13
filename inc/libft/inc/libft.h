@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:19:31 by skassimi          #+#    #+#             */
-/*   Updated: 2025/03/10 09:16:44 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/13 08:03:28 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define LIBFT_H
 
 # include <stdlib.h>
-# include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <stddef.h>
 
 typedef struct s_list
 {
@@ -92,6 +92,5 @@ int		ft_atoi_base(char *str, char *base);
 void	ft_lstpop(t_list **head, t_list *node, void (*del)(void *));
 int		ft_iseven(int num);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-
 
 #endif

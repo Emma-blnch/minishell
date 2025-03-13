@@ -6,27 +6,11 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:19:30 by skassimi          #+#    #+#             */
-/*   Updated: 2025/03/10 12:44:12 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/13 11:40:59 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	count_arg(char **params)
-{
-	int	count;
-
-	count = 0;
-	while (params[count])
-		count++;
-	return (count);
-}
-
-static void	error_malloc(void)
-{
-	print_error2(ERR_MALLOC);
-	return ;
-}
 
 static void	update_oldpwd(t_shell *shell)
 {
@@ -55,47 +39,67 @@ static void	update_pwd(t_shell *shell, char *param)
 		perror(param);
 		return ;
 	}
-	//printf("Mise à jour PWD: %s\n", cwd);
 	pwd = ft_strjoin("PWD=", cwd);
 	if (!pwd)
 		return (error_malloc());
-	//printf("Chemin récupéré par getcwd: '%s'\n", cwd);  // Affiche le chemin exactement comme il est
 	export2(pwd, &shell->env);
 	free(pwd);
 }
 
-int	cd(t_shell *data, char **params)
+static char	*get_target_path(t_shell *shell, char **params, bool *allocated)
 {
-	int		res;
 	char	*path;
-	bool	allocated;
 
-	path = NULL;
-	allocated = false;
-	if (count_arg(params) == 1 || (count_arg(params) == 2 && !ft_strncmp(params[1], "~", 2))) //Cas `cd` ou `cd ~` : aller à `$HOME`
+	*allocated = false;
+	if (count_arg(params) == 1
+		|| (count_arg(params) == 2 && !ft_strncmp(params[1], "~", 2)))
 	{
-		path = get_elem_env(data->env, "HOME");
+		path = get_elem_env(shell->env, "HOME");
 		if (!path)
 		{
 			printf("cd: HOME not set\n");
-			return (1);
+			return (NULL);
 		}
-		allocated = true;
+		*allocated = true;
 	}
 	else if (count_arg(params) == 2)
 		path = params[1];
-	if (path != NULL)
+	else
+		path = NULL;
+	return (path);
+}
+
+static int	exec_cd(t_shell *shell, char *path)
+{
+	int	res;
+
+	res = chdir(path);
+	if (res == 0)
+		update_pwd(shell, path);
+	if (res == -1)
 	{
-		res = chdir(path);
-		if (res == 0)
-			update_pwd(data, path);
-		if (res == -1)
-			res *= -1;
-		if (res == 1)
-			perror(path);
-		if (allocated)
-			free(path);
-		return (res);
+		perror(path);
+		return (1);
 	}
-	return (1);
+	return (0);
+}
+
+int	cd(t_shell *shell, char **params)
+{
+	char	*path;
+	bool	allocated;
+	int		res;
+
+	if (params[2])
+	{
+		printf("cd: too many arguments\n");
+		return (1);
+	}
+	path = get_target_path(shell, params, &allocated);
+	if (!path)
+		return (1);
+	res = exec_cd(shell, path);
+	if (allocated)
+		free(path);
+	return (res);
 }

@@ -6,7 +6,7 @@
 #    By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/26 15:54:29 by ahamini           #+#    #+#              #
-#    Updated: 2025/03/03 13:06:29 by ahamini          ###   ########.fr        #
+#    Updated: 2025/03/13 10:50:15 by ahamini          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,8 @@ FUNC_EXEC	= 	execution.c \
 				exec_utils.c \
 				find_cmd.c \
 				setup.c \
+				setup_utils.c \
+				heredoc_utils.c \
 				heredoc.c
 
 				
@@ -52,14 +54,17 @@ FUNC_PARS	=	cleanup.c \
 				errors.c \
 				manage_dollar.c \
 				parse_cmd.c \
+				parse_utils.c \
 				quote.c \
 				readline.c \
 				signals.c \
 				signals2.c \
 				token_utils.c \
+				token_utils2.c \
 				token.c
 
 FUNC_BUTI	=	cd.c \
+				cd_utils.c \
 				echo.c \
 				env.c \
 				exit.c \

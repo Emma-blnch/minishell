@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:02:49 by skassimi          #+#    #+#             */
-/*   Updated: 2025/03/11 13:55:13 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/13 11:11:20 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ bool		is_space(char c);
 int			open_quote(t_shell *shell, char *input);
 void		quoting_choice(bool *d_quote, bool *s_quote, int *index, char c);
 int			replace_dollar(char **line, t_shell *shell);
+int			check_double_dollar(char *line);
+bool		check_syntax(char *input);
 int			add_char(char *c, char **str, t_shell *shell, int *index);
 int			add_dollar(char *line, int *index, char **str, t_shell *shell);
 char		*get_dollar_word(char *line, int size);
@@ -88,6 +90,17 @@ int			exist_in_env(char *line, int *i, t_shell *shell);
 size_t		len_list(t_list *list);
 bool		create_list_token(t_token **begin, char *command);
 bool		create_list_cmd(t_shell *shell);
+bool		handle_cmd_list(t_shell *shell);
+bool		handle_token_and_malloc(t_shell *shell, char *input);
+bool		handle_syntax_and_replacement(t_shell *shell, char **input);
+bool		handle_quotes_and_dollar(t_shell *shell, char *input);
+bool		handle_command_token(t_token **begin, char **command,
+				int *last_was_operator);
+bool		handle_special_token(t_token **begin, char **command,
+				int *last_was_operator);
+bool		add_special(t_token **begin, char **command);
+bool		add_cmd(t_token **begin, char **command);
+bool		handle_syntax_error(t_token **begin);
 bool		is_space(char c);
 int			is_special(char *str);
 int			append_token(t_token **list, char *str, int type);
@@ -99,24 +112,25 @@ char		**get_param(t_shell *shell, t_token *token);
 /* HEREDOC */
 
 int			here_doc(t_shell *shell, char *word);
+void		write_eof(char *word);
 
 /* EXECUTION */
 
 int			exec_tree(t_shell *shell);
+void		close_fds(t_cmd *cmd);
+void		handle_status(t_shell *shell, int status);
 int			append(t_list **list, char *elem);
 char		**lst_to_arr(t_list *env);
 void		child_process(t_shell *shell, t_cmd *cmd, int *pip);
 void		absolute_path(char **path, char *cmd, t_shell *shell);
 char		*find_cmd(char *sample, t_list *env);
-//int			exec_pipe(t_shell *shell, t_tree *tree);
-//int			exec_one_cmd(t_shell *shell, t_tree *tree, bool piped);
-//int			create_process_or_pipe(t_shell *shell, int *fd, bool is_pipe);
-//void		get_cmd_path(t_shell *shell, t_cmd *cmd);
-//void		command_into_array(t_cmd *cmd);
+void		add_first2(t_list **list, t_list *new);
 
 /* BUILT IN */
 
 int			cd(t_shell *shell, char **params);
+int			count_arg(char **params);
+void		error_malloc(void);
 int			echo(char **argv);
 int			env(t_list *env, char **cmd);
 int			export(char **str, t_list **env);
@@ -124,21 +138,10 @@ bool		export2(char *str, t_list **env);
 void		sort_array(char **arr, int len);
 int			ft_unset(char **str, t_list **env);
 t_list		*find_env(t_list *env_list, char *env_name);
-int			pwd(void);
+int			pwd(char **args);
 void		ft_exit(t_shell *shell, char **args);
 int			launch_builtin(t_shell *shell, t_cmd *cmd);
 int			is_builtin(char *cmd);
-
-/* REDIRECTION */
-
-//static int	open_file(t_shell *shell, char *filename, int type);
-//void		redirect_for_cmd(t_shell *shell, t_cmd *cmd);
-//int			connect_pipes_and_exec(t_shell *shell, t_tree *tree,
-//				int pipe_fd[2], int mode);
-//void		close_pipe(int *pipe_fd);
-//void		set_infile_fd(t_shell *shell, t_cmd *cmd);
-//void		set_outfile_fd(t_cmd *cmd);
-//void		reset_std(t_shell *shell, bool piped);
 
 /* ERROR HANDLING */
 

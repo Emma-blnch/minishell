@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:49:13 by ahamini           #+#    #+#             */
-/*   Updated: 2025/03/10 12:44:10 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/13 09:25:39 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,6 @@
 	}
 	printf("Type : %d, [%s]\n", tmp->type, tmp->str);
 }*/
-
-static int	check_double_dollar(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == '$' && line[i + 1] == '$')
-		{
-			ft_putstr_fd("PID: command not found\n", 2);
-			g_signal_pid = 127;
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
 
 bool	check_pipe(t_shell *shell)
 {
@@ -70,57 +52,36 @@ bool	empty_input(char *line)
 	return (false);
 }
 
-bool    check_syntax(char *input)
+bool	check_syntax(char *input)
 {
-    t_token *tmp_token = NULL;
+	t_token	*tmp_token;
 
-    if (!create_list_token(&tmp_token, input))
-    {
-        free_token(&tmp_token); // Nettoyage minimal
-        return (false); // Erreur de syntaxe (ex: >>>)
-    }
-    free_token(&tmp_token);
-    return (true);
+	tmp_token = NULL;
+	if (!create_list_token(&tmp_token, input))
+	{
+		free_token(&tmp_token);
+		return (false);
+	}
+	free_token(&tmp_token);
+	return (true);
 }
 
-bool    parse_cmd(t_shell *shell, char *input)
+bool	parse_cmd(t_shell *shell, char *input)
 {
-    if (open_quote(shell, input))
-    {
-        free(input);
-        return (false);
-    }
-    if (check_double_dollar(input))
-    {
-        free(input);
-        return (false);
-    }
-    if (!check_syntax(input))
-    {
-        free(input);
-        return (false);
-    }
-    if (!replace_dollar(&input, shell)
-        || !create_list_token(&shell->token, input))
-    {
-        free(input);
-        free_all(shell, ERR_MALLOC, EXT_MALLOC);
-        return (false);
-    }
-    free(input);
-	//print_token(shell->token);
-    if (!shell->token || !create_list_cmd(shell))
-    {
-        free_token(&shell->token);
-        free_cmd(&shell->cmd);
-        return (false);
-    }
-    return (check_pipe(shell));
+	if (!handle_quotes_and_dollar(shell, input))
+		return (false);
+	if (!handle_syntax_and_replacement(shell, &input))
+		return (false);
+	if (!handle_token_and_malloc(shell, input))
+		return (false);
+	if (!handle_cmd_list(shell))
+		return (false);
+	return (check_pipe(shell));
 }
 
 int	init_readline(t_shell *shell)
 {
-	char		*input;
+	char	*input;
 
 	while (1)
 	{
@@ -137,7 +98,6 @@ int	init_readline(t_shell *shell)
 			free_all(shell, ERR_PIPE, EXT_PIPE);
 		free_cmd(&shell->cmd);
 		free_token(&shell->token);
-		//g_signal_pid = 0;
 	}
 	rl_clear_history();
 	free_all(shell, NULL, -1);

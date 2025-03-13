@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/13 08:15:04 by ahamini           #+#    #+#             */
-/*   Updated: 2025/03/13 08:25:12 by ahamini          ###   ########.fr       */
+/*   Created: 2025/03/13 10:16:32 by ahamini           #+#    #+#             */
+/*   Updated: 2025/03/13 10:17:33 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
+#include "minishell.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+void	write_eof(char *word)
 {
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	if (!*needle)
-		return ((char *)haystack);
-	while (haystack[i] && i < len)
-	{
-		j = 0;
-		while (haystack[i + j] == needle[j] && i + j < len)
-		{
-			j++;
-			if (!needle[j])
-				return ((char *)haystack + 1);
-		}
-		i++;
-	}
-	return (NULL);
+	write(2, "warning: here-document delimited by end-of-file ", 49);
+	write(2, "(wanted '", 9);
+	write(2, word, ft_strlen(word));
+	write(2, "')\n", 3);
 }

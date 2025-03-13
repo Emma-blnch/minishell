@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:50:04 by ahamini           #+#    #+#             */
-/*   Updated: 2025/03/10 10:22:34 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/13 11:11:54 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
 
+	if (argc >= 2)
+	{
+		printf("Usage : './minishell'\n");
+		return (0);
+	}
 	(void)argc;
 	(void)argv;
 	shell.env = NULL;

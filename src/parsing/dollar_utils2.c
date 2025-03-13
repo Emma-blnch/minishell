@@ -6,7 +6,7 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 13:34:56 by ahamini           #+#    #+#             */
-/*   Updated: 2025/03/03 13:29:02 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/13 09:17:01 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,22 @@ int	in_env(t_shell *shell, char *line, int size, char **str)
 		return (0);
 	*str = tmp;
 	return (1);
+}
+
+int	check_double_dollar(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '$' && line[i + 1] == '$')
+		{
+			ft_putstr_fd("PID: command not found\n", 2);
+			g_signal_pid = 127;
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }

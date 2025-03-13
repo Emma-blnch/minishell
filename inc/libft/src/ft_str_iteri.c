@@ -6,11 +6,10 @@
 /*   By: ahamini <ahamini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 18:33:57 by mkling            #+#    #+#             */
-/*   Updated: 2025/02/26 14:14:17 by ahamini          ###   ########.fr       */
+/*   Updated: 2025/03/13 08:08:28 by ahamini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "../inc/libft.h"
 
 size_t	ft_strlen(const char *s)
