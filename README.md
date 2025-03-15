@@ -3,9 +3,9 @@ Un projet réalisé dans le cadre du cursus à l'école 42, en binôme avec Akim
 Ce projet a pour but de recréer un shell Unix minimaliste en langage C, capable d’interpréter et d’exécuter des commandes de manière interactive.
 
 # 🚀 Objectif du projet
-👉 Apprendre à gérer des processus, des signaux et des entrées/sorties.
-👉 Reproduire certaines fonctionnalités du shell Bash.
-👉 Implémenter un interpréteur de commandes robustes, gérant les redirections, pipes, variables d’environnement...
+👉 Apprendre à gérer des processus, des signaux et des entrées/sorties.  
+👉 Reproduire certaines fonctionnalités du shell Bash.  
+👉 Implémenter un interpréteur de commandes robustes, gérant les redirections, pipes, variables d’environnement...  
 
 # 🛠️ Fonctionnalités
 - Exécution de commandes (simples et avec chemins absolus/relatifs)
