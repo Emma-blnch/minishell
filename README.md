@@ -31,7 +31,7 @@ $ cat fichier.txt | grep "bonjour" > resultat.txt
 ```
 
 # 👨‍💻 Développeurs
-Emma Blanchard
+Emma Blanchard  
 Akim Hamini
 
 # 📁 Structure du projet
