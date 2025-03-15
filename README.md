@@ -1,5 +1,5 @@
 # 🐚 Minishell
-Un projet réalisé dans le cadre du cursus à l'école 42, en binôme avec Akim 👥 
+Un projet réalisé dans le cadre du cursus à l'école 42, en binôme avec Akim 👥  
 Ce projet a pour but de recréer un shell Unix minimaliste en langage C, capable d’interpréter et d’exécuter des commandes de manière interactive.
 
 # 🚀 Objectif du projet
