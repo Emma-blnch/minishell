@@ -7,6 +7,14 @@ Ce projet a pour but de recréer un shell Unix minimaliste en langage C, capable
 👉 Reproduire certaines fonctionnalités du shell Bash.  
 👉 Implémenter un interpréteur de commandes robustes, gérant les redirections, pipes, variables d’environnement...  
 
+# 🧠 Ce que ce projet m’a appris
+Au-delà des compétences techniques en C et de la connaissance approfondie du fonctionnement d’un shell UNIX, ce projet m’a permis de développer de nombreuses compétences transversales :
+- *Travail en binôme :* gestion du code à deux, communication constante, et prise de décision partagée sur la structure du projet.
+- *Organisation et rigueur :* découpage du projet en modules, respect des normes 42 (Norme, Makefile, gestion des erreurs...).
+- *Résolution de problèmes complexes :* gestion des redirections, des pipes, de la mémoire, et du comportement attendu d’un shell, même dans des cas limites.
+- *Lecture et interprétation de documentation système :* pour comprendre et utiliser des appels système comme fork, execve, dup2, waitpid, etc.
+- *Autonomie et persévérance :* face aux bugs parfois difficiles à déboguer (notamment les signaux 😅), il a fallu tester, chercher, comparer avec bash et persister.
+
 # 🛠️ Fonctionnalités
 - Exécution de commandes (simples et avec chemins absolus/relatifs)
 - Commandes built-in : echo, cd, pwd, export, unset, env, exit
