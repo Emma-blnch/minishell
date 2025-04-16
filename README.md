@@ -1,6 +1,5 @@
 # 🐚 Minishell
 
-Un projet réalisé dans le cadre du cursus à l'école 42, en binôme avec Akim 👥  
 A team project from 42 Paris: rebuilding a simple Unix shell using **C** and system calls.  
 This shell can execute commands, handle redirections and pipes, manage environment variables and signals — all in an interactive terminal interface.
 
