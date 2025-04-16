@@ -32,7 +32,7 @@ Over and above my technical skills in C and in-depth knowledge of how a UNIX she
 - *Reading and interpreting system documentation:* understanding and using system calls such as `fork`, `execve`, `dup2`, `waitpid`, etc.
 - *Autonomy and perseverance:* facing bugs that were sometimes difficult to debug (particularly 😅 signals), we had to test, search, compare with bash and persist.
 
-## 🧪 Examples
+## 🧪 Behavior examples
 ```
 $ echo "hello world"
 hello world
