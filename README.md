@@ -25,12 +25,12 @@ This shell can execute commands, handle redirections and pipes, manage environme
 ✅ Syntax error detection
 
 ## 🧠 What I learned
-Au-delà des compétences techniques en C et de la connaissance approfondie du fonctionnement d’un shell UNIX, ce projet m’a permis de développer de nombreuses compétences transversales :
-- *Travail en binôme :* gestion du code à deux, communication constante, et prise de décision partagée sur la structure du projet.
-- *Organisation et rigueur :* découpage du projet en modules, respect des normes 42 (Norme, Makefile, gestion des erreurs...).
-- *Résolution de problèmes complexes :* gestion des redirections, des pipes, de la mémoire, et du comportement attendu d’un shell, même dans des cas limites.
-- *Lecture et interprétation de documentation système :* pour comprendre et utiliser des appels système comme fork, execve, dup2, waitpid, etc.
-- *Autonomie et persévérance :* face aux bugs parfois difficiles à déboguer (notamment les signaux 😅), il a fallu tester, chercher, comparer avec bash et persister.
+Over and above my technical skills in C and in-depth knowledge of how a UNIX shell works, this project enabled me to develop a number of cross-disciplinary skills:
+- *Working in pairs:* code management, constant communication, and shared decision-making on project structure.
+- *Organization and rigor:* dividing the project into modules, respecting 42 standards (Norme, Makefile, error management...).
+- *Complex problem solving:* management of redirects, pipes, memory, and expected shell behavior, even edge cases.
+- *Reading and interpreting system documentation:* understanding and using system calls such as `fork`, `execve`, `dup2`, `waitpid`, etc.
+- *Autonomy and perseverance:* facing bugs that were sometimes difficult to debug (particularly 😅 signals), we had to test, search, compare with bash and persist.
 
 ## 🧪 Examples
 ```
