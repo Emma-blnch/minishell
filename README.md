@@ -30,7 +30,7 @@ Over and above my technical skills in C and in-depth knowledge of how a UNIX she
 - *Organization and rigor:* dividing the project into modules, respecting 42 standards (Norme, Makefile, error management...).
 - *Complex problem solving:* management of redirects, pipes, memory, and expected shell behavior, even edge cases.
 - *Reading and interpreting system documentation:* understanding and using system calls such as `fork`, `execve`, `dup2`, `waitpid`, etc.
-- *Autonomy and perseverance:* facing bugs that were sometimes difficult to debug (particularly 😅 signals), we had to test, search, compare with bash and persist.
+- *Autonomy and perseverance:* facing bugs that were sometimes difficult to debug (particularly signals 😅), we had to test, search, compare with bash and persist.
 
 ## 🧪 Behavior examples
 ```
