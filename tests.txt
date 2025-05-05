@@ -1,10 +1,9 @@
 echo "test" > test.txt > test2.txt > test3.txt
-= Est-ce que le shell écrase bien seulement le dernier fichier ? Ou bug ?
+= Est-ce que le shell écrit bien seulement dans le dernier fichier ? 
 
 sleep 10 | sleep 10 | sleep 10
-= Le minishell gère-t-il les processus fils sans laisser de zombies ?
+= Le minishell crash t-il ?
 
 echo """"""""""""""""""""""""""""""""""""""""""""""
 echo ')))))))))))))))))))))))))))))))))))))))))))))'
-echo |||||||||||||||||||||||||||||||||||||||||||||
 = Résiste-t-il aux tokens chelous ? Boucle infinie ? Segfault ?
