@@ -1,0 +1,19 @@
+"yes | yes | yes | yes | head -n 5" = Vois s'il y a une fuite ou un freeze sur une longue chaîne.
+
+echo "test" > test.txt > test2.txt > test3.txt
+= Est-ce que le shell écrase bien seulement le dernier fichier ? Ou bug ?
+
+export LONGVAR=$(yes a | head -c 100000)
+echo $LONGVAR
+= Le shell tient-il une expansion aussi longue ? Crash ? Lag ?
+
+sleep 10 | sleep 10 | sleep 10
+= Le minishell gère-t-il les processus fils sans laisser de zombies ?
+
+for i in {1..500}; do echo hello > file_$i.txt ; done
+=Check s’il y a fuite ou plantage en créant de nombreux fichiers avec redirection.
+
+echo """"""""""""""""""""""""""""""""""""""""""""""
+echo ')))))))))))))))))))))))))))))))))))))))))))))'
+echo |||||||||||||||||||||||||||||||||||||||||||||
+= Résiste-t-il aux tokens chelous ? Boucle infinie ? Segfault ?
