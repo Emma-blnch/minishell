@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/ayogun/42-project-badges/blob/main/badges/minishelle.png">
+</p>
+
 # 🐚 Minishell
 
 A team project from 42 Paris: rebuilding a simple Unix shell using **C** and system calls.  
